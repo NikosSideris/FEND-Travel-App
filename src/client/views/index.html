@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Travel App</title>
+        <meta name="description" content="FEND CAPSTONE PROJECT">
+        <meta name="author" content="Nikos">
+
+        <link rel="stylesheet" href="../styles/resets.css?v=1.0">
+        <link rel="stylesheet" href="../styles/base.css?v=1.0">
+        <link rel="stylesheet" href="../styles/header.css?v=1.0">
+        <link rel="stylesheet" href="../styles/form.css?v=1.0">
+        <link rel="stylesheet" href="../styles/footer.css?v=1.0">
+    </head>
+
+    <body>
+
+        <header>
+            <div class="logo">
+                Travel App
+            </div>
+            <div class="navMenu">
+                <a class="active" href="#home">Home</a>
+                <a href="#news">News</a>
+                <a href="#contact">Contact</a>
+                <a href="#about">About</a>
+              </div>
+
+
+        </header>
+
+        <main>
+            <section id="userData">
+                <form class="userDataForm" onsubmit="return handleSubmit(event)">
+                    <div id="destination">
+                        <label for="country">Country:</label>
+                        <input id="country" type="text" name="country" value="" placeholder="Country">
+                        
+                        <label for="city">City:</label>
+                        <input id="city" type="text" name="city" value="" placeholder="City">
+                     </div>
+                     <div id="time">
+                        <label for="departure">Departure:</label>
+                        <input id="departure" type="date" name="departure" value="" placeholder="Departure">
+                        
+                        <label for="arrival">Arrival:</label>
+                        <input id="arrival" type="date" name="arrival" value="" placeholder="Arrival">
+                    </div>
+                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                </form>
+                <!-- <form class="userDataForm" onsubmit="return handleSubmit(event)">
+                    <input id="name" type="text" name="input" value="" placeholder="Name/URL">
+                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                </form> -->
+            <section>
+
+            <section>
+                <strong>Form Results:</strong>
+                <div id="results"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>This is a footer</p>
+        </footer>
+
+    </body>
+</html>
