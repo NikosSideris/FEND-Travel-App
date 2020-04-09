@@ -6,12 +6,12 @@
         <meta name="description" content="FEND CAPSTONE PROJECT">
         <meta name="author" content="Nikos">
 
-        <link rel="stylesheet" href="../styles/resets.css?v=1.0">
-        <link rel="stylesheet" href="../styles/base.css?v=1.0">
-        <link rel="stylesheet" href="../styles/header.css?v=1.0">
-        <link rel="stylesheet" href="../styles/form.css?v=1.0">
-        <link rel="stylesheet" href="../styles/footer.css?v=1.0">
-        <link rel="stylesheet" href="../styles/main.css?v=1.0">
+        <!-- <link rel="stylesheet" href="../styles/resets.scss?v=1.0">
+        <link rel="stylesheet" href="../styles/base.scss?v=1.0">
+        <link rel="stylesheet" href="../styles/header.scss?v=1.0">
+        <link rel="stylesheet" href="../styles/form.scss?v=1.0">
+        <link rel="stylesheet" href="../styles/footer.scss?v=1.0">
+        <link rel="stylesheet" href="../styles/main.scss?v=1.0"> -->
     </head>
 
     <body>
@@ -32,7 +32,7 @@
 
         <main>
             <section id="userData">
-                <form class="userDataForm" onsubmit="return handleSubmit(event)">
+                <form class="userDataForm" onsubmit="return Client.handleSubmit(event)">
                     <div id="destination">
                         <label for="country">Country:</label>
                         <input id="country" type="text" name="country" value="" placeholder="Country">
@@ -47,7 +47,7 @@
                         <label for="arrival">Return:</label>
                         <input id="arrival" type="date" name="arrival" value="" placeholder="Arrival">
                     </div>
-                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
                 </form>
                 <!-- <form class="userDataForm" onsubmit="return handleSubmit(event)">
                     <input id="name" type="text" name="input" value="" placeholder="Name/URL">
@@ -63,11 +63,11 @@
                     </div>
 
                     <div id="pixabay ">
-                        <img src="../images/socrates.jpg" alt="Stickman" width="200" height="200">
+                        <img src="./images/socrates.jpg" alt="socrates" width="200" height="200">
                     </div>
                 </div>
                 <div id="weatherbit ">
-                    <img src="../images/socrates.jpg" alt="Stickman" width="400" height="200">
+                    <img src="./images/socrates.jpg" alt="socrates" width="400" height="200">
                 </div>
             </section>
 

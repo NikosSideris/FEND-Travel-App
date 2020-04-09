@@ -5,18 +5,18 @@ async function handleSubmit(event) {
     let city=document.getElementById("city").nodeValue;
     let departure=document.getElementById("departure").nodeValue;
     let arrival=document.getElementById("arrival").nodeValue;
-    let data = {
+    let userData = {
         "city": city,
         "departure": departure,
         "arrival": arrival
     };
 
-    if (isValidUserInput(data)) {
+    if (isValidUserInput(userData)) {
         let coordinates=await getGeonames(city)
         .then(()=>{
-            let weather=await getWeatherbit(coordinates)
+            let weather= getWeatherbit(coordinates)
             .then(()=>{
-                let image=await getPixabay(city)
+                let image= getPixabay(city)
                 .then(()=>{
                     updateUi(coordinates, weather, image)
                 })
@@ -24,8 +24,7 @@ async function handleSubmit(event) {
         })
         .catch(()=>{
             //TODO 
-        }
-        )
+        })
     }else{
         //TODO HANDLE WRONG INPUT
 
@@ -33,9 +32,12 @@ async function handleSubmit(event) {
 
 }
 
+function  updateUi(coordinates, weather, image) {
+    //TODO
+}
 
 function isValidUserInput(data){
-
+    //TODO
 }
 
 export { handleSubmit }

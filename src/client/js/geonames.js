@@ -1,7 +1,7 @@
 async function getGeonames(location) {
     
   const geonamesUrl = 'http://api.geonames.org/';
-  const geonamesKey = 'stamay';
+  const geonamesKey = process.env.GeonamesUserName;
   const geonamesQuery = 'searchJSON?formatted=true&q=';
 
   return await getGeoLocation(city)
@@ -26,3 +26,5 @@ async function getGeonames(location) {
       console.log(error);
     }
 }
+
+export { getGeonames }

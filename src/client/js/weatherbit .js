@@ -24,3 +24,5 @@ async function getWeatherbit(coordinates) {
     //   console.log(error);
     // }
 }
+
+export { getWeatherbit }

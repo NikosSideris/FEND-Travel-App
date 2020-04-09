@@ -4,7 +4,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-    entry: './src/client/app.js',
+    entry: './src/client/index.js',
     output: {
         libraryTarget: 'var',
         library: 'Client'
@@ -24,7 +24,39 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [ 'style-loader', 'css-loader', 'sass-loader' ]
-        }
+            },
+            {
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                  'file-loader',
+                  {
+                    loader: 'image-webpack-loader',
+                    options: {
+                      name: '[path][name].[ext]',
+                      bypassOnDebug: true, // webpack@1.x
+                      disable: true, // webpack@2.x and newer
+                      mozjpeg: {
+                        progressive: true,
+                        quality: 65
+                      },
+                      optipng: {
+                        enabled: false,
+                      },
+                      pngquant: {
+                        quality: [0.65, 0.90],
+                        speed: 4
+                      },
+                      gifsicle: {
+                        interlaced: false,
+                      },
+                      // the webp option will enable WEBP
+                      webp: {
+                        quality: 75
+                      }
+                    },
+                  },
+                ],
+              },
         ]
     },
     plugins: [

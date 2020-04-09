@@ -7,11 +7,14 @@ const TerserPlugin = require('terser-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
-    entry: './src/client/app.js',
+    entry: './src/client/index.js',
     optimization: {
         minimizer: [new TerserPlugin({}),new OptimizeCSSAssetsPlugin({})],
     },
-
+    output: {
+        libraryTarget: 'var',
+        library: 'Client'
+    },
     mode: 'production',
     module: {
         // exprContextRegExp: /^\.\/.*$/,
@@ -25,7 +28,39 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader','sass-loader']
-            }
+            },
+            {
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                  'file-loader',
+                  {
+                    loader: 'image-webpack-loader',
+                    options: {
+                      name: '[path][name].[ext]',
+                      //bypassOnDebug: true, // webpack@1.x
+                      disable: true, // webpack@2.x and newer
+                      mozjpeg: {
+                        progressive: true,
+                        quality: 65
+                      },
+                      optipng: {
+                        enabled: false,
+                      },
+                      pngquant: {
+                        quality: [0.65, 0.90],
+                        speed: 4
+                      },
+                      gifsicle: {
+                        interlaced: false,
+                      },
+                      // the webp option will enable WEBP
+                      webp: {
+                        quality: 75
+                      }
+                    },
+                  },
+                ],
+              },
     
         ]
     },

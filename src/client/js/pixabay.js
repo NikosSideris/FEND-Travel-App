@@ -24,3 +24,5 @@ async function getPixabay(city) {
     //   console.log(error);
     // }
 }
+
+export { getPixabay }

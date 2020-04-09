@@ -13,3 +13,5 @@ function readInput(){
     
     return userInput;
 }
+
+export { readInput }
