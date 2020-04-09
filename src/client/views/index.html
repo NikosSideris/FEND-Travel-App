@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="../styles/header.css?v=1.0">
         <link rel="stylesheet" href="../styles/form.css?v=1.0">
         <link rel="stylesheet" href="../styles/footer.css?v=1.0">
+        <link rel="stylesheet" href="../styles/main.css?v=1.0">
     </head>
 
     <body>
@@ -43,7 +44,7 @@
                         <label for="departure">Departure:</label>
                         <input id="departure" type="date" name="departure" value="" placeholder="Departure">
                         
-                        <label for="arrival">Arrival:</label>
+                        <label for="arrival">Return:</label>
                         <input id="arrival" type="date" name="arrival" value="" placeholder="Arrival">
                     </div>
                     <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
@@ -52,16 +53,32 @@
                     <input id="name" type="text" name="input" value="" placeholder="Name/URL">
                     <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
                 </form> -->
-            <section>
+            </section>
+            <section id="apiscontent">
+                <div id=geoimage>
+                    <div id="geonames">
+                        <label id="lon">Longitude: </label>
+                        <label id="lat">Latitude: </label>
+                        <!-- <img src="../images/socrates.jpg" alt="Stickman" width="200" height="200"> -->
+                    </div>
 
-            <section>
+                    <div id="pixabay ">
+                        <img src="../images/socrates.jpg" alt="Stickman" width="200" height="200">
+                    </div>
+                </div>
+                <div id="weatherbit ">
+                    <img src="../images/socrates.jpg" alt="Stickman" width="400" height="200">
+                </div>
+            </section>
+
+            <section id="results">
                 <strong>Form Results:</strong>
-                <div id="results"></div>
+                <div ></div>
             </section>
         </main>
 
         <footer>
-            <p>This is a footer</p>
+            <p>Copyright 2020 Nikos</p>
         </footer>
 
     </body>
