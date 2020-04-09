@@ -1,9 +1,21 @@
 main {
     display: grid;
-    grid-template-columns: 200px, 5fr;
-    grid-template-areas: "ud ap ap ap ap ap" "re re re re re re";
-    width: 100%;
-}
+    grid-template-columns: 1fr 3.5fr;
+    grid-template-rows: 1fr 0.5fr 0.5fr;
+    gap: 1px 1px;
+    grid-template-areas: "ud pi" "ge we" "re we";
+    padding: 8px;
+  }
+  
+  .ud { grid-area: ud; }
+
+  .pi { grid-area: pi; }
+
+  .ge { grid-area: ge; }
+
+  .we { grid-area: we; }
+  
+  .re { grid-area: re; }
 
 /* for debugging */
 main * {
@@ -12,39 +24,34 @@ main * {
     padding: 8px;
 }
 
-#userData{
-grid-area: ud;
-width: 200px;
-}
+  #userDataForm{
+    grid-area: ud;
+    width: 200px;
+    }
 
-#apiscontent{
-    grid-area: ap;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
+    #pixabay{
+        max-height: 400px;
+    }
 
-#geoimage{
-    display: flex;
-    flex-direction: row;
-}
+    #weatherbit{
+        width: 100%;
+    }
 
-#geonames{
-    width: 100px;
-    display: flex;
-    flex-direction: column;
+    #geonames{
+        display: flex;
+        flex-direction: column;
 
-}
-#pixabay{
-    width: 400px;
-}
+    }
+    #geonames label{
+        font-size: x-large;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
 
-#weatherbit{
-    width: 100%;
-}
-
-#results{
-    display: block;
-    grid-area: re;
-    width: 100%;
-}
+    img {
+        display: block;
+        max-width: 400px;
+        // width: 100vw;
+        // height: 100vh;
+        object-fit: contain;
+      }

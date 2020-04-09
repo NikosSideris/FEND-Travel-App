@@ -6,12 +6,12 @@
         <meta name="description" content="FEND CAPSTONE PROJECT">
         <meta name="author" content="Nikos">
 
-        <!-- <link rel="stylesheet" href="../styles/resets.scss?v=1.0">
+        <link rel="stylesheet" href="../styles/resets.scss?v=1.0">
         <link rel="stylesheet" href="../styles/base.scss?v=1.0">
         <link rel="stylesheet" href="../styles/header.scss?v=1.0">
         <link rel="stylesheet" href="../styles/form.scss?v=1.0">
         <link rel="stylesheet" href="../styles/footer.scss?v=1.0">
-        <link rel="stylesheet" href="../styles/main.scss?v=1.0"> -->
+        <link rel="stylesheet" href="../styles/main.scss?v=1.0">
     </head>
 
     <body>
@@ -25,56 +25,53 @@
                 <a href="#news">News</a>
                 <a href="#contact">Contact</a>
                 <a href="#about">About</a>
-              </div>
-
-
+            </div>
         </header>
 
         <main>
-            <section id="userData">
-                <form class="userDataForm" onsubmit="return Client.handleSubmit(event)">
-                    <div id="destination">
-                        <label for="country">Country:</label>
-                        <input id="country" type="text" name="country" value="" placeholder="Country">
-                        
-                        <label for="city">City:</label>
-                        <input id="city" type="text" name="city" value="" placeholder="City">
-                     </div>
-                     <div id="time">
-                        <label for="departure">Departure:</label>
-                        <input id="departure" type="date" name="departure" value="" placeholder="Departure">
-                        
-                        <label for="arrival">Return:</label>
-                        <input id="arrival" type="date" name="arrival" value="" placeholder="Arrival">
-                    </div>
-                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
-                </form>
-                <!-- <form class="userDataForm" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" placeholder="Name/URL">
-                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
-                </form> -->
-            </section>
-            <section id="apiscontent">
-                <div id=geoimage>
-                    <div id="geonames">
-                        <label id="lon">Longitude: </label>
-                        <label id="lat">Latitude: </label>
-                        <!-- <img src="../images/socrates.jpg" alt="Stickman" width="200" height="200"> -->
-                    </div>
 
-                    <div id="pixabay ">
-                        <img src="./images/socrates.jpg" alt="socrates" width="200" height="200">
-                    </div>
+            <div class="ud" id="userData">
+              <form class="userDataForm" onsubmit="return Client.handleSubmit(event)">
+                <div id="destination">
+                    <label for="country">Country:</label>
+                    <input id="country" type="text" name="country" value="" placeholder="Country">
+                    
+                    <label for="city">City:</label>
+                    <input id="city" type="text" name="city" value="" placeholder="City">
+                 </div>
+                 <div id="time">
+                    <label for="departure">Departure:</label>
+                    <input id="departure" type="date" name="departure" value="" placeholder="Departure">
+                    
+                    <label for="arrival">Return:</label>
+                    <input id="arrival" type="date" name="arrival" value="" placeholder="Arrival">
                 </div>
-                <div id="weatherbit ">
-                    <img src="./images/socrates.jpg" alt="socrates" width="400" height="200">
-                </div>
-            </section>
+                <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
+              </form>
+            </div>
 
-            <section id="results">
-                <strong>Form Results:</strong>
-                <div ></div>
-            </section>
+            <div class="pi" id="pixabay">
+              <!-- <div id="pixabay" class="px" style="background-image: url('../images/socrates.jpg');"> -->
+                <img src="/images/socrates.jpg" alt="socrates" >
+            </div>
+
+            <div class="we" id="weatherbit">
+                <!-- <img src="../images/socrates.jpg" alt="socrates" width="400" height="400"> -->
+                <img src="./images/socrates.jpg" alt="socrates" width="300">
+             </div>
+
+            <div class="ge">
+              <div id="geonames">
+                <label id="lon">Longitude: </label>
+                <label id="lat">Latitude: </label>
+              </div>
+            </div>
+
+            <div class="re" id="results">
+
+              <strong>Form Results:</strong>
+            </div>
+
         </main>
 
         <footer>

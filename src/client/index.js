@@ -11,7 +11,7 @@ import './styles/form.scss'
 import './styles/footer.scss'
 
 // import { socrates } from './images/socrates.jpg';
-import img from './images/socrates.jpg';
+import img from '.client/images/socrates.jpg';
 
 export {
     getGeonames,
