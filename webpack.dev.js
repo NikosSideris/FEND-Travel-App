@@ -26,37 +26,15 @@ module.exports = {
                 use: [ 'style-loader', 'css-loader', 'sass-loader' ]
             },
             {
-                test: /\.(gif|png|jpe?g|svg)$/i,
-                use: [
-                  'file-loader',
-                  {
-                    loader: 'image-webpack-loader',
-                    options: {
-                      name: '[path][name].[ext]',
-                      bypassOnDebug: true, // webpack@1.x
-                      disable: true, // webpack@2.x and newer
-                      mozjpeg: {
-                        progressive: true,
-                        quality: 65
-                      },
-                      optipng: {
-                        enabled: false,
-                      },
-                      pngquant: {
-                        quality: [0.65, 0.90],
-                        speed: 4
-                      },
-                      gifsicle: {
-                        interlaced: false,
-                      },
-                      // the webp option will enable WEBP
-                      webp: {
-                        quality: 75
-                      }
-                    },
-                  },
-                ],
-              },
+              test: /\.(png|jp(e*)g|svg)$/,  
+              use: [{
+                  loader: 'url-loader',
+                  options: { 
+                      limit: 8000, // Convert images < 8kb to base64 strings
+                      name: 'images/[hash]-[name].[ext]'
+                  } 
+              }]
+          }
         ]
     },
       plugins: [

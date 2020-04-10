@@ -3,12 +3,12 @@ async function getGeonames(location) {
   const geonamesUrl = 'http://api.geonames.org/';
   const geonamesKey = process.env.GeonamesUserName;
   const geonamesQuery = 'searchJSON?formatted=true&q=';
-
+  const url = geonamesUrl + geonamesQuery + location + '&username=' + geonamesKey + '&style=full';
   return await getGeoLocation(city)
 }
 
-  async function getGeoLocation(city) {
-    const url = geonamesUrl + geonamesQuery + location + '&username=' + geonamesKey + '&style=full'; 
+  async function getGeoLocation(url) {
+ 
     try {
       const response = await fetch(url);
       if (response.ok) {

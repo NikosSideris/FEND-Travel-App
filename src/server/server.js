@@ -36,14 +36,15 @@ app.get('/all', function (req, res) {
 })
 
 //Geonames
-app.post('/save', (req, res, next) => {
-    if (req.body !== " ") {
-      const trip = req.body.trip;
-      buffer.push(trip);
-      res.status(201).send(trip);
-    } else {
-      res.status(400).json('Bad Request');
-    }
+app.post('/geo', (req, res) => {
+    res.send("geo")
+    // if (req.body !== " ") {
+    //   const trip = req.body.trip;
+    //   buffer.push(trip);
+    //   res.status(201).send(trip);
+    // } else {
+    //   res.status(400).json('Bad Request');
+    // }
   });
 
 
