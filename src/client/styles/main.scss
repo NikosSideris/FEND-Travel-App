@@ -15,7 +15,9 @@ main {
 
   .we { grid-area: we; }
   
-  .re { grid-area: re; }
+  .re { grid-area: re; 
+
+}
 
 /* for debugging */
 main * {
@@ -31,6 +33,9 @@ main * {
 
     #pixabay{
         max-height: 400px;
+        display: flex;
+        flex-direction: row;
+        align-content: space-between;
     }
 
     #weatherbit{
@@ -40,10 +45,10 @@ main * {
     #geonames{
         display: flex;
         flex-direction: column;
-
+        line-height: 50%;
     }
     #geonames label{
-        font-size: x-large;
+        font-size: small;
         margin-top: 8px;
         margin-bottom: 8px;
     }
@@ -54,4 +59,8 @@ main * {
         // width: 100vw;
         // height: 100vh;
         object-fit: contain;
+      }
+
+      #results{
+        vertical-align: middle;
       }

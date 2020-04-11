@@ -52,12 +52,14 @@
 
             <div class="pi" id="pixabay">
               <!-- <div id="pixabay" class="px" style="background-image: url('../images/socrates.jpg');"> -->
-                <img id="pixabayImg" alt="socrates" >
+                <img id="pixabayImg" >
+                <img id="pixabayImg2" >
+                <div id="results"></div>
             </div>
 
             <div class="we" id="weatherbit">
                 <!-- start weathergrid -->
-                <div class="grid-container">
+                <div class="grid-container" id="gridContainer">
                   <div id="a1"></div>
                   <div id="a2"></div>
                   <div id="a3"></div>
@@ -123,16 +125,14 @@
                 <!-- ends weathergrid -->
              </div>
 
-            <div class="ge">
-              <div id="geonames">
-                <label id="lon">Longitude: </label>
-                <label id="lat">Latitude: </label>
-              </div>
+            <div class="ge" id="geonames">
+                <label id="lon"> </label>
+                <label id="lat"> </label>
+                <label id="cit"> </label>
+                <label id="cou"> </label>
             </div>
 
-            <div class="re" id="results">
-
-              <strong>Form Results:</strong>
+            <div class="re" >
             </div>
 
         </main>

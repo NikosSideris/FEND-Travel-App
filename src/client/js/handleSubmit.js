@@ -1,9 +1,12 @@
 import moment, { now } from "moment";
+import { addD, compD, subD } from "./dateUtils";
 async function handleSubmit(event) {
 
     event.preventDefault()
     let coordinates;
     let userData = readInput();
+
+  if(!isValidUserInput){return;}
 
     let impDays = importantDays(userData.departure, userData.arrival);
     // userData.city = getCity();
@@ -30,7 +33,7 @@ async function handleSubmit(event) {
     outputPixabay(userData);
     console.log(userData);
     outputWeather(userData.weatherForecast,impDays);
-
+    outputResults(userData,impDays);
   }
 
   async function getGeoLocation(location) {
@@ -154,19 +157,19 @@ for (let i = 1; i < 16; i++) {
   da=dd.getDate();
   title=da+"-"+mon;
   document.getElementById(col).innerHTML=title;
-  if (i>=impDays.start && i<=impDays.end) {
+  if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
     document.getElementById(col).style.color=colore;
     document.getElementById(col).style.backgroundColor=bgcolore;
   }else{
     document.getElementById(col).style.color="#000";
     document.getElementById(col).style.backgroundColor="#fff";
   }
-  console.log(col, title);
+  // console.log(col, title);
   // temp
   title=element.temp+"<sup>o</sup>C";
   col="b"+i;
   document.getElementById(col).innerHTML=title;
-  if (i>=impDays.start && i<=impDays.end) {
+  if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
     document.getElementById(col).style.color=colore;
     document.getElementById(col).style.backgroundColor=bgcolore;
   }else{
@@ -176,7 +179,7 @@ for (let i = 1; i < 16; i++) {
   //icons
   let sr="/src/client/images/"+element.weather.icon+".png";
   document.getElementById("c"+i+"img").src=sr;
-  if (i>=impDays.start && i<=impDays.end) {
+  if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
     document.getElementById("c"+i).style.color=colore;
     document.getElementById("c"+i).style.backgroundColor=bgcolore;
   }else{
@@ -185,75 +188,69 @@ for (let i = 1; i < 16; i++) {
   }
   //description
   document.getElementById("d"+i).innerHTML=element.weather.description;
-  if (i>=impDays.start && i<=impDays.end) {
+  if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
     document.getElementById("d"+i).style.color=colore;
     document.getElementById("d"+i).style.backgroundColor=bgcolore;
   }else{
     document.getElementById("d"+i).style.color="#000";
     document.getElementById("d"+i).style.backgroundColor="#fff";
   }
-}
-
-  for (let i = impDays.start; i < impDays.end; i++) {
-    const element = weatherData[i];
-    
-  }
 
 }
+
+  document.getElementById("gridContainer").style.borderWidth="1px";
+  document.getElementById("gridContainer").style.borderRadius="4px";
+  document.getElementById("gridContainer").style.borderStyle="Solid";
+  // document.getElementById("gridContainer").classList.add("active");
+}
+
 function outputPixabay(userData) {
   document.getElementById("pixabayImg").src=userData.image;
+  document.getElementById("pixabayImg2").src=userData.countryFlag;
 }
 function outputCoordinates(userData) {
-  document.getElementById("lon").innerHTML="Longitude: ",userData.longitude;
-  document.getElementById("lat").innerHTML="Latitude: ",userData.latitude;
+  document.getElementById("lon").innerHTML="Longitude: "+userData.longitude;
+  document.getElementById("lat").innerHTML="Latitude: "+userData.latitude;
+  document.getElementById("cit").innerHTML="City: "+userData.city;
+  document.getElementById("cou").innerHTML="Country: "+userData.countryCode;
+
+  // document.getElementById("geonames").style.borderWidth="1px";
+  // document.getElementById("geonames").style.borderRadius="4px";
+  // document.getElementById("geonames").style.borderStyle="Solid";
+  
+}
+function outputResults(userData,impDays) {
+  let output, durationStr, outOfRange, partial;
+  if (!impDays.isRetInvalid) {
+    // let duration=impDays.end-impDays.start;
+    durationStr="Trip duration: "+impDays.duration+" day(s)";
+  }else{
+    durationStr="Return date earlier than Departure date. Taking into account only the Departure date...";
+  }
+
+if (impDays.isOutOfRange) {
+   outOfRange="No Weather forecast available for the given days. Displaying forecast for the next 15 days";
+}else{
+  outOfRange="";
+}
+if (impDays.isPartial) {
+  partial="Forecast available fron only part of the trip (in red)"
+} else {
+  partial="";
+}
+output=durationStr+"\n\n"+outOfRange+"\n\n"+partial;
+document.getElementById("results").innerHTML=output;
+
+document.getElementById("results").style.color="#f00";
+
+document.getElementById("results").style.borderWidth="1px";
+document.getElementById("results").style.borderRadius="4px";
+document.getElementById("results").style.borderStyle="Solid";
+
 }
 //*******************************************my */
 
 
-    if (isValidUserInput(userData)) {
-        console.log("fetching info...");
-        postData('/geo',userData.city)
-        .then(()=>{
-            updateUI();
-        })
-        // coordinates=await Client.getGeonames(userData.city)
-        // .then(()=>{
-        //     let weather= getWeatherbit(coordinates)
-        //     .then(()=>{
-        //         let image= getPixabay(city)
-                // .then((coordinates)=>{
-                    // updateUi(coordinates, weather, image)
-                //     console.log(coordinates);
-                    
-                //     updateUi(coordinates,0,0)
-                // })
-        //     })
-        // })
-        .catch((error)=>{
-            //TODO 
-            console.log(error);
-            ;
-            
-        })
-    }else{
-        //TODO HANDLE WRONG INPUT
-
-    }
-
-
-
-
-const updateUI = async () => {
-    // console.log("updateUI called");
-    const request = await fetch('/all');
-    try{
-      let allData = await request.json();
-        let coordinates=allData[0];
-        document.getElementById("results").innerHTML=coordinates;
-    }catch(error){
-      console.log("error", error);
-    }
-  }
 
 function isValidUserInput(data){
     //TODO
@@ -301,27 +298,22 @@ const postData = async ( url , data)=>{
     return userInput;
 }
 
-
-function importantDays(departStr,returnStr){
+function importantDays0(departStr,returnStr){
   const dayms=1000 * 60 * 60 * 24;
   let idays={}
   let current= Date.now();
-  // current=Date.now();
-  // current=current.getMilliseconds();
   let d=new Date(departStr);
   let depart=d.valueOf();
   let r=new Date(returnStr);
   let ret=r.valueOf();
   let limit=current+dayms*15;
 
-  idays.lag=truncate((depart-current)/dayms)+1;
-  // let limit=moment().add(15, 'days').calendar();
-  // idays.limit=new Date(limit);
-  idays.quant=truncate((limit-depart)/dayms);
+  idays.lag=truncate((depart-current)/dayms);
+  idays.quant=truncate((limit-depart)/dayms+1);
   if(ret<limit){
-    idays.end=truncate((ret-current)/dayms)+1;
+    idays.end=truncate((ret-current)/dayms);
   }else{
-    idays.end=truncate((limit-current)/dayms)+1;
+    idays.end=truncate((limit-current)/dayms);
   }
   idays.start=idays.lag;
   // idays.end=ret/dayms;
@@ -330,9 +322,30 @@ function importantDays(departStr,returnStr){
   return idays;
 }
 
-function float2int (value) {
-  return value | 0;
+function importantDays(departStr,returnStr){
+  const dayms=1000 * 60 * 60 * 24;
+
+  let idays={}
+  let dep=new Date(departStr);
+  dep=dep/dayms;
+  let ret=new Date(returnStr);
+  ret=ret/dayms;
+  let current= new Date().getTime();
+  current=truncate(current/dayms);
+  let limit=current+15;
+  idays.limit=limit;
+  idays.duration=ret-dep;
+  idays.start=dep-current;
+  idays.end=ret-current;
+  idays.isOutOfRange=limit<dep;
+  idays.isRetInvalid=ret<dep;
+  idays.isPartial=ret>limit && dep<=limit;
+
+  console.log(idays);
+  
+  return idays;
 }
+
 function truncate(value)
 {
     if (value < 0) {
