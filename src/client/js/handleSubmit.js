@@ -166,7 +166,7 @@ for (let i = 1; i < 16; i++) {
   }
   // console.log(col, title);
   // temp
-  title=element.temp+"<sup>o</sup>C";
+  title=element.temp+"<sup>o</sup>"+"C";
   col="b"+i;
   document.getElementById(col).innerHTML=title;
   if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
