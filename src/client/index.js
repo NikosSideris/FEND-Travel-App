@@ -10,15 +10,20 @@ import './styles/header.scss'
 import './styles/main.scss'
 import './styles/form.scss'
 import './styles/footer.scss'
-
-// import { socrates } from './images/socrates.jpg';
-import socrates  from './images/socrates.jpg';
+import './styles/weather.scss'
 
 
-var homeImg = document.getElementById('socrates');
-homeImg.src = socrates;
-var homeImg2 = document.getElementById('socrates2');
-homeImg2.src = socrates;
+import placeholdericon  from './images/placeholdericon.png';
+
+for (let i = 1; i < 16; i++) {
+    document.getElementById("c"+i+"img").src=placeholdericon;
+    // insertAdjacentHTML="&lt;img src=placeholdericon &gt;";
+}
+
+// var homeImg = document.getElementById('socrates');
+    // const element = array[i];
+// homeImg.src = socrates;
+
 
 export {
     getGeonames,

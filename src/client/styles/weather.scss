@@ -1,0 +1,137 @@
+.grid-container {
+    border-style: solid;
+    border-width: 2px;
+    font-size: smaller;
+    display: grid;
+    grid-template-rows: minmax(150px, auto);
+
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 1px 2px;
+    grid-template-areas: "a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15" "b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 b12 b13 b14 b15" "c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15" "d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15";
+  }
+  
+  .a1 { grid-area: a1; }
+  
+  .a2 { grid-area: a2; }
+  
+  .a3 { grid-area: a3; }
+  
+  .a4 { grid-area: a4; }
+  
+  .a5 { grid-area: a5; }
+  
+  .a6 { grid-area: a6; }
+  
+  .a7 { grid-area: a7; }
+  
+  .a8 { grid-area: a8; }
+  
+  .a9 { grid-area: a9; }
+  
+  .a10 { grid-area: a10; }
+  
+  .a11 { grid-area: a11; }
+  
+  .a12 { grid-area: a12; }
+  
+  .a13 { grid-area: a13; }
+  
+  .a14 { grid-area: a14; }
+  
+  .a15 { grid-area: a15; }
+  
+  .b1 { grid-area: b1; }
+  
+  .b2 { grid-area: b2; }
+  
+  .b3 { grid-area: b3; }
+  
+  .b4 { grid-area: b4; }
+  
+  .b5 { grid-area: b5; }
+  
+  .b6 { grid-area: b6; }
+  
+  .b7 { grid-area: b7; }
+  
+  .b8 { grid-area: b8; }
+  
+  .b9 { grid-area: b9; }
+  
+  .b10 { grid-area: b10; }
+  
+  .b11 { grid-area: b11; }
+  
+  .b12 { grid-area: b12; }
+  
+  .b13 { grid-area: b13; }
+  
+  .b14 { grid-area: b14; }
+  
+  .b15 { grid-area: b15; }
+  
+  .c1 { grid-area: c1; }
+  
+  .c2 { grid-area: c2; }
+  
+  .c3 { grid-area: c3; }
+  
+  .c4 { grid-area: c4; }
+  
+  .c5 { grid-area: c5; }
+  
+  .c6 { grid-area: c6; }
+  
+  .c7 { grid-area: c7; }
+  
+  .c8 { grid-area: c8; }
+  
+  .c9 { grid-area: c9; }
+  
+  .c10 { grid-area: c10; }
+  
+  .c11 { grid-area: c11; }
+  
+  .c12 { grid-area: c12; }
+  
+  .c13 { grid-area: c13; }
+  
+  .c14 { grid-area: c14; }
+  
+  .c15 { grid-area: c15; }
+  
+  .d1 { grid-area: d1; }
+  
+  .d2 { grid-area: d2; }
+  
+  .d3 { grid-area: d3; }
+  
+  .d4 { grid-area: d4; }
+  
+  .d5 { grid-area: d5; }
+  
+  .d6 { grid-area: d6; }
+  
+  .d7 { grid-area: d7; }
+  
+  .d8 { grid-area: d8; }
+  
+  .d9 { grid-area: d9; }
+  
+  .d10 { grid-area: d10; }
+  
+  .d11 { grid-area: d11; }
+  
+  .d12 { grid-area: d12; }
+  
+  .d13 { grid-area: d13; }
+  
+  .d14 { grid-area: d14; }
+  
+  .d15 { grid-area: d15; }
+  
+  .grid-container img{
+    max-width: 50px;
+    max-height: 50px;
+  }
