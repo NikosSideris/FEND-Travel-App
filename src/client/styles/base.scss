@@ -14,7 +14,19 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: scroll;
 }
+
+  /* smaller screens */
+  @media screen and (max-width:900px){
+    // .grid-container
+     .scrollable {
+        overflow-x: scroll;
+      }
+      #pixabayImg2{
+          display: none;
+      }
+    }
 
 // main {
 //     // flex: 2;

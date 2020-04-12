@@ -1,9 +1,9 @@
 main {
     display: grid;
     grid-template-columns: 1fr 3.5fr;
-    grid-template-rows: 1fr 0.5fr 0.5fr;
+    grid-template-rows: 1fr 1fr ;
     gap: 1px 1px;
-    grid-template-areas: "ud pi" "ge we" "re we";
+    grid-template-areas: "ud pi" "we we" ;
     padding: 8px;
   }
   
@@ -11,7 +11,7 @@ main {
 
   .pi { grid-area: pi; }
 
-  .ge { grid-area: ge; }
+  // .ge { grid-area: ge; }
 
   .we { grid-area: we; }
   
@@ -21,9 +21,10 @@ main {
 
 /* for debugging */
 main * {
-    // border: 1px solid #545454;
-    // border-radius: 3px;
-    padding: 8px;
+//     // border: 1px solid #545454;
+//     // border-radius: 3px;
+//     padding: 8px;
+overflow: hidden;
 }
 
   #userDataForm{
@@ -31,36 +32,42 @@ main * {
     width: 200px;
     }
 
-    #pixabay{
-        max-height: 400px;
-        display: flex;
-        flex-direction: row;
-        align-content: space-between;
-    }
+    // #pixabay{
+    //     max-height: 400px;
+    //     display: flex;
+    //     flex-direction: row;
+    //     align-content: space-between;
+    // }
 
     #weatherbit{
-        width: 100%;
+        // width: 100%;
+        display: inline-block;
     }
 
     #geonames{
         display: flex;
-        flex-direction: column;
-        line-height: 50%;
+        flex-direction: row;
+        // line-height: 50%;
+        font-size: x-small;
+        margin-top: 4px;
     }
     #geonames label{
-        font-size: small;
-        margin-top: 8px;
-        margin-bottom: 8px;
+        font-size: x-small;
+        // margin-top: 8px;
+        // margin-bottom: 8px;
     }
 
     img {
         display: block;
-        max-width: 400px;
+        max-width: 300px;
         // width: 100vw;
         // height: 100vh;
         object-fit: contain;
       }
 
       #results{
+        font-size: x-small;
         vertical-align: middle;
+        // line-height: 50%;
+        margin-top: 4px;
       }

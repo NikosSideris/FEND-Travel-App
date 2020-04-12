@@ -1,0 +1,21 @@
+.pi {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 5fr 1fr;
+    gap: 0px 2px;
+    grid-template-areas: "im fl" "ge re";
+  }
+  
+  .im { grid-area: im; }
+
+  .fl { grid-area: fl; }
+  
+  .ge {
+    grid-area: ge; 
+    padding-top: 8px;
+    }
+  
+  .re { 
+    grid-area: re; 
+    padding-top: 8px;
+}

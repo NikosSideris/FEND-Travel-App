@@ -1,5 +1,6 @@
 header {
     display: flex;
+    // display: block;
     flex-direction: row;
     justify-content: space-between;
     padding: 10px 40px;
@@ -7,31 +8,31 @@ header {
     color: var(--main-color);
 }
 
-.navMenu{
-    display: flex;
-    flex-direction: row;
-    align-content: flex-end;
-    padding-right: 4px;
-    overflow: hidden;
-}
+// .navMenu{
+//     display: flex;
+//     flex-direction: row;
+//     align-content: flex-end;
+//     padding-right: 4px;
+//     overflow: hidden;
+// }
 
-.navMenu a{
-    padding-right: 8px;
-    text-decoration: none;
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    font-size: 17px;
-}
+// .navMenu a{
+//     padding-right: 8px;
+//     text-decoration: none;
+//     float: left;
+//     color: #f2f2f2;
+//     text-align: center;
+//     font-size: 17px;
+// }
 
-/* Change the color of links on hover */
-.navMenu a:hover {
-    background-color: #ddd;
-    color: var(--main-bg-color);
-  }
+// /* Change the color of links on hover */
+// .navMenu a:hover {
+//     background-color: #ddd;
+//     color: var(--main-bg-color);
+//   }
   
-  /* Add a color to the active/current link */
-  .navMenu a.active {
-    /* background-color: black; */
-    color: black;
-  }
+//   /* Add a color to the active/current link */
+//   .navMenu a.active {
+//     /* background-color: black; */
+//     color: black;
+//   }

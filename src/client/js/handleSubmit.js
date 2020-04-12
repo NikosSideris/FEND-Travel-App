@@ -234,7 +234,7 @@ if (impDays.isOutOfRange) {
   outOfRange="";
 }
 if (impDays.isPartial) {
-  partial="Forecast available fron only part of the trip (in red)"
+  partial="Forecast available for only part of the trip (in red)"
 } else {
   partial="";
 }
@@ -243,9 +243,9 @@ document.getElementById("results").innerHTML=output;
 
 document.getElementById("results").style.color="#f00";
 
-document.getElementById("results").style.borderWidth="1px";
-document.getElementById("results").style.borderRadius="4px";
-document.getElementById("results").style.borderStyle="Solid";
+// document.getElementById("results").style.borderWidth="1px";
+// document.getElementById("results").style.borderRadius="4px";
+// document.getElementById("results").style.borderStyle="Solid";
 
 }
 //*******************************************my */

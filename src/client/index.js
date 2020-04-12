@@ -17,7 +17,7 @@ import './styles/main.scss'
 import './styles/form.scss'
 import './styles/footer.scss'
 import './styles/weather.scss'
-
+import './styles/pixabay.scss'
 
 import placeholdericon  from './images/placeholdericon.png';
 
