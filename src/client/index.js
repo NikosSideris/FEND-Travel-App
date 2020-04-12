@@ -2,12 +2,8 @@ import { handleSubmit }   from './js/handleSubmit'
 import { getWeatherbit }   from './js/weatherbit '
 import { getGeonames }   from '../server/geonames'
 import { getPixabay }   from './js/pixabay'
-import { d2m }   from './js/dateUtils'
-import { m2d }   from './js/dateUtils'
-import { addD }   from './js/dateUtils'
-import { subD }   from './js/dateUtils'
-import { compD }   from './js/dateUtils'
-
+import { clearUi }   from './js/clearUi'
+import { TimezZ } from "timezz";
 // import { readInput }   from './js/readInput'
 
 import './styles/resets.scss'
@@ -36,9 +32,6 @@ export {
     getPixabay,
     handleSubmit,
     getWeatherbit,
-    d2m,
-    m2d,
-    addD,
-    subD,
-    compD
+    clearUi,
+    TimezZ
 }

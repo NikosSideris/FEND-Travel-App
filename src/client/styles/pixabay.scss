@@ -1,14 +1,34 @@
-.pi {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 5fr 1fr;
-    gap: 0px 2px;
-    grid-template-areas: "im fl" "ge re";
-  }
+#pixabay{
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px;
+}
+#images{
+  display: flex;
+  flex-direction: row;
+}
+#images img{
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  max-height: 300px;
+}
+#info{
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+}
+// .pi {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr;
+//     grid-template-rows: 5fr 1fr;
+//     gap: 0px 2px;
+//     grid-template-areas: "im fl" "ge re";
+//   }
   
-  .im { grid-area: im; }
+//   .im { grid-area: im; }
 
-  .fl { grid-area: fl; }
+//   .fl { grid-area: fl; }
   
   .ge {
     grid-area: ge; 

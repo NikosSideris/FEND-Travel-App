@@ -2,12 +2,12 @@
   
 
 .grid-container {
-
+  padding: 0px;
     font-size: small;
     display: grid;
     align-items: center;
     padding: 4px;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(15, minmax(60px, 1fr));
     overflow-x: scroll;
     // grid-template-rows: minmax(150px, auto);
 
@@ -24,6 +24,13 @@
     border-width: 2px;
     border-radius: 4px;
     padding: 4px;
+  }
+
+  .grid-container img{
+    max-width: 60px;
+    max-height: 60px;
+    min-width: 30px;
+    min-height: 30px;
   }
 
   .a1 { grid-area: a1; }
@@ -146,9 +153,3 @@
   
   .d15 { grid-area: d15; }
   
-  .grid-container img{
-    max-width: 60px;
-    max-height: 60px;
-    min-width: 30px;
-    min-height: 30px;
-  }

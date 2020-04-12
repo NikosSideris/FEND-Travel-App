@@ -1,30 +1,41 @@
-main {
-    display: grid;
-    grid-template-columns: 1fr 3.5fr;
-    grid-template-rows: 1fr 1fr ;
-    gap: 1px 1px;
-    grid-template-areas: "ud pi" "we we" ;
-    padding: 8px;
-  }
-  
-  .ud { grid-area: ud; }
-
-  .pi { grid-area: pi; }
-
-  // .ge { grid-area: ge; }
-
-  .we { grid-area: we; }
-  
-  .re { grid-area: re; 
-
+main{
+  display: flex;
+  flex-direction: column;
+  padding-right: 8px;
 }
+
+#row1{
+  display: flex;
+  flex-direction: row;
+  padding-right: 8px;
+}
+// main {
+//     display: grid;
+//     grid-template-columns: 1fr 3.5fr;
+//     grid-template-rows: 1fr 1fr ;
+//     gap: 1px 1px;
+//     grid-template-areas: "ud pi" "we we" ;
+//     padding: 8px;
+//   }
+  
+//   .ud { grid-area: ud; }
+
+//   .pi { grid-area: pi; }
+
+//   // .ge { grid-area: ge; }
+
+//   .we { grid-area: we; }
+  
+//   .re { grid-area: re; 
+
+// }
 
 /* for debugging */
 main * {
-//     // border: 1px solid #545454;
-//     // border-radius: 3px;
-//     padding: 8px;
-overflow: hidden;
+// //     // border: 1px solid #545454;
+// //     // border-radius: 3px;
+     padding: 8px;
+// // overflow: hidden;
 }
 
   #userDataForm{
@@ -48,15 +59,18 @@ overflow: hidden;
         display: flex;
         flex-direction: row;
         // line-height: 50%;
-        font-size: x-small;
+        font-size: small;
         margin-top: 4px;
     }
     #geonames label{
-        font-size: x-small;
+        font-size: small;
         // margin-top: 8px;
         // margin-bottom: 8px;
     }
 
+    #info{
+      margin-right: 8px;
+    }
     img {
         display: block;
         max-width: 300px;
@@ -66,8 +80,12 @@ overflow: hidden;
       }
 
       #results{
-        font-size: x-small;
+        font-size: small;
         vertical-align: middle;
         // line-height: 50%;
         margin-top: 4px;
+      }
+
+      .j-first-timer{
+        height: 50px;
       }

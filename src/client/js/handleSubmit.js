@@ -1,12 +1,17 @@
-import moment, { now } from "moment";
-import { addD, compD, subD } from "./dateUtils";
+import TimezZ from "timezz";
+
 async function handleSubmit(event) {
 
     event.preventDefault()
     let coordinates;
-    let userData = readInput();
+    const userData = await readInput();
 
-  if(!isValidUserInput){return;}
+    // let check=isValidUserInput(userData);
+  if(!isValidUserInput(userData)){
+    // console.log(check);
+    
+    return;
+  }
 
     let impDays = importantDays(userData.departure, userData.arrival);
     // userData.city = getCity();
@@ -34,25 +39,55 @@ async function handleSubmit(event) {
     console.log(userData);
     outputWeather(userData.weatherForecast,impDays);
     outputResults(userData,impDays);
+
+    let display = document.querySelector('#countDown');
+    document.querySelector('#countDown').style.color='#f00';
+
+    let interval;
+ 
+    // startTimer(impDays.start, display,interval);
+
+    console.log(impDays);
+    
+    const timer = new TimezZ(".j-first-timer", {
+      date: impDays.timer, //"Dec 02, 2023 00:00:00",
+      text: {
+        days: " days",
+        hours: " hours",
+        minutes: " minutes",
+        seconds: " seconds"
+      },
+      isStopped: false,
+      canContinue: true,
+      template: "<span>NUMBER</span><i>LETTER</i> ",
+      beforeCreate() {console.log("timer starting");
+      },
+    });
+
+    setTimeout(() => {
+      timer.destroy();
+    }, 100000);
   }
 
+
+
   async function getGeoLocation(location) {
-    const geonamesUrl = 'http://api.geonames.org/';
-    const geonamesKey = 'stamay';
-    const geonamesQuery = 'searchJSON?formatted=true&q=';
-    const endpoint = geonamesUrl + geonamesQuery + location + '&username=' + geonamesKey + '&style=full'; 
+    const url = 'http://api.geonames.org/';
+    const key ='kugar';
+    const query = 'searchJSON?formatted=true&q=';
+    const endpoint = url + query + location + '&username=' + key + '&style=full'; 
     try {
       const response = await fetch(endpoint);
       if (response.ok) {
-        const location = {};
-        const jsonRes = await response.json();
+        const data = {};
+        const jResponse = await response.json();
         
-        location.latitude = jsonRes.geonames[0].lat;
-        location.longitude = jsonRes.geonames[0].lng;
-        location.countryCode = jsonRes.geonames[0].countryCode;
+        data.latitude = jResponse.geonames[0].lat;
+        data.longitude = jResponse.geonames[0].lng;
+        data.countryCode = jResponse.geonames[0].countryCode;
   
-        console.log(location);
-        return location;
+        console.log(data);
+        return data;
       }
     } catch (error) {
       console.log(error);
@@ -60,8 +95,6 @@ async function handleSubmit(event) {
   }
   
   async function getWeatherForecast(latitude, longitude) {
-    // const darkSkyURL = 'https://api.darksky.net/forecast/';
-    // const darkSkyKey = 'a44b6a01155bc9391c311378b6f5bcee';
     const url = 'http://api.weatherbit.io/v2.0/forecast/daily ';
     const key = '1f6bca0399b141d4bab99bb6a511d04e';
     const query="?lat="+`${latitude}`+"&lon="+ `${longitude}`+"&key=";
@@ -73,15 +106,8 @@ async function handleSubmit(event) {
       const response = await fetch(endpoint);
         if (response.ok) {
           const weather = [];
-          const jsonRes = await response.json();
-          const data=jsonRes.data;
-          // console.log(data);
-          
-          // for (let i = 0; i < data.length; i++) {
-          //   const element = data[i];
-            
-          // }
-
+          const jResponse = await response.json();
+          const data=jResponse.data;
           return data;
         }
       } catch (error) {
@@ -91,27 +117,25 @@ async function handleSubmit(event) {
 
   async function getImageURL(city, country) {
     const pixabayURL = 'https://pixabay.com/api/?key=';
-    const pixabayKey = '13922659-0b80b0f115dd3a353e0647b73';
+    const pixabayKey ='16011201-a637befdddb2d0b23b6155047';
     const queryCity = `&q=${city}&image_type=photo&pretty=true&category=places`;
     const queryCountry = `&q=${country}&image_type=photo&pretty=true&category=places`
     
-    const cityEndpoint = pixabayURL + pixabayKey + queryCity;
-    const countryEndpoint = pixabayURL + pixabayKey + queryCountry;
+    const qCity = pixabayURL + pixabayKey + queryCity;
+    const qCountry = pixabayURL + pixabayKey + queryCountry;
     try {
-      let response = await fetch(cityEndpoint);
+      let response = await fetch(qCity);
       if (response.ok) {
-        let jsonRes = await response.json();
-        if (jsonRes.totalHits === 0) {
-          // If not, display pictures for the country
-          response = await fetch(countryEndpoint);
+        let jRes = await response.json();
+        if (jRes.totalHits === 0) {
+          // if no city imgs, then ask country imgs
+          response = await fetch(qCountry);
           if (response.ok) {
-            jsonRes = await response.json();
-            return jsonRes.hits[0].largeImageURL;
+            jRes = await response.json();
+            return jRes.hits[0].largeImageURL;
           }
         }
-        // console.log(jsonRes);
-        // console.log(jsonRes.hits[0].largeImageURL);
-        return jsonRes.hits[0].largeImageURL;
+        return jRes.hits[0].largeImageURL;
       }
     } catch (error) {
       console.log(error);
@@ -123,17 +147,16 @@ async function handleSubmit(event) {
     try {
       const response = await fetch(endpoint);
       if (response.ok) {
-        const jsonRes = await response.json();
+        const res = await response.json();
         return {
-                 name: jsonRes.name,
-                 flag: jsonRes.flag
+                 name: res.name,
+                 flag: res.flag
               }
       }
     } catch (error) {
       console.log(error);
     }
   }
-
 
 function outputWeather(weatherData,impDays) {
   let d=new Date();
@@ -166,7 +189,7 @@ for (let i = 1; i < 16; i++) {
   }
   // console.log(col, title);
   // temp
-  title=element.temp+"<sup>o</sup>"+"C";
+  title=element.temp+" C";
   col="b"+i;
   document.getElementById(col).innerHTML=title;
   if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
@@ -238,7 +261,11 @@ if (impDays.isPartial) {
 } else {
   partial="";
 }
+
 output=durationStr+"\n\n"+outOfRange+"\n\n"+partial;
+if (impDays.start<0){
+  output="Departure date cannot be earlier than current date. Just diplaying the next 15 days forecast..."
+}
 document.getElementById("results").innerHTML=output;
 
 document.getElementById("results").style.color="#f00";
@@ -253,8 +280,8 @@ document.getElementById("results").style.color="#f00";
 
 
 function isValidUserInput(data){
-    //TODO
-    return (data.city!=null && data.departure!=null)
+    const res=(data.city!=null && data.city!="" && data.departure!=null && data.departure!="" );
+    return res;
 }
 
 /* Function to POST data */
@@ -282,7 +309,7 @@ const postData = async ( url , data)=>{
       }
   }
 
-  function readInput(){
+  async function readInput(){
     // let country = document.getElementById("country").value;
     let city = document.getElementById("city").value;
     let departure = document.getElementById("departure").value;
@@ -298,39 +325,91 @@ const postData = async ( url , data)=>{
     return userInput;
 }
 
-function importantDays0(departStr,returnStr){
-  const dayms=1000 * 60 * 60 * 24;
-  let idays={}
-  let current= Date.now();
-  let d=new Date(departStr);
-  let depart=d.valueOf();
-  let r=new Date(returnStr);
-  let ret=r.valueOf();
-  let limit=current+dayms*15;
+function startTimer0(duration, display,interval) {
+  duration=duration*60*60*24;
+  /* From https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer*/
+  var timer = duration, days, hours, minutes, seconds;
+  setInterval(function () {
+      let d=timer/86400; let dt=truncate(d);
+      let h=(d-dt)*24; let ht=truncate(h);
+      let m=(h-ht)*60; let mt=truncate(m);
+      days=parseInt(dt, 10);
+      hours =parseInt(ht, 10);
+      minutes = parseInt(mt, 10);
+      seconds = parseInt(timer % 60, 10);
 
-  idays.lag=truncate((depart-current)/dayms);
-  idays.quant=truncate((limit-depart)/dayms+1);
-  if(ret<limit){
-    idays.end=truncate((ret-current)/dayms);
-  }else{
-    idays.end=truncate((limit-current)/dayms);
-  }
-  idays.start=idays.lag;
-  // idays.end=ret/dayms;
+      days = days < 10 ? "0" + days : days;
+      hours = hours < 10 ? "0" + hours : hours;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
 
-  console.log(idays);
-  return idays;
+      display.textContent = days + ":" + hours + ":" + minutes + ":" + seconds;
+
+      if (--timer < 0) {
+          timer = duration;
+      }
+  }, 1000);
 }
+
+function startTimer(duration, display,interval) {
+  duration=duration*60*60*24;
+  /* From https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer*/
+
+  let timer = duration, days;
+  clearInterval(interval)
+  interval=setInterval(function () {
+      // let d=timer/86400; let dt=truncate(d);
+      // let h=(d-dt)*24; let ht=truncate(h);
+      // let m=(h-ht)*60; let mt=truncate(m);
+      days=parseInt(truncate(timer/86400+1), 10);
+      // hours =parseInt(ht, 10);
+      // minutes = parseInt(mt, 10);
+      // seconds = parseInt(timer % 60, 10);
+
+      days = days < 10 ? "0" + days : days;
+      // hours = hours < 10 ? "0" + hours : hours;
+      // minutes = minutes < 10 ? "0" + minutes : minutes;
+      // seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      if(days>0){
+      display.textContent = "Departure in "+days + " days";
+      }else{
+        display.textContent = "";
+      }
+
+      if (--timer < 0) {
+          timer = duration;
+      }
+  }, 1000);
+  return timer;
+}
+// window.onload = function () {
+//   var fiveMinutes = 60 * 5,
+//       display = document.querySelector('#countDown');
+//   startTimer(fiveMinutes, display);
+// };
 
 function importantDays(departStr,returnStr){
   const dayms=1000 * 60 * 60 * 24;
 
   let idays={}
-  let dep=new Date(departStr);
+  var d = new Date(departStr);
+  var y=d.getFullYear();
+  var m=d.getMonth()+1;
+  var a=d.getDate();
+  let dep=new Date(y+"-"+m+"-"+a);
+  dep.setHours(0);
+  dep.setMinutes(0);
+  dep.setSeconds(0);
+  idays.timer=dep;
   dep=dep/dayms;
   let ret=new Date(returnStr);
   ret=ret/dayms;
-  let current= new Date().getTime();
+   d = new Date();
+   y=d.getFullYear();
+   m=d.getMonth()+1;
+   a=d.getDate();
+  let current= new Date(y+"-"+m+"-"+a); //.getTime();
   current=truncate(current/dayms);
   let limit=current+15;
   idays.limit=limit;

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Travel App</title>
-        <meta name="description" content="FEND CAPSTONE PROJECT">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
         <meta name="author" content="Nikos">
 
         <!-- <link rel="stylesheet" href="../styles/resets.scss?v=1.0">
@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="../styles/main.scss?v=1.0"> -->
     </head>
 
-    <body class="scrollable">
+    <body>
 
         <header>
             <div class="logo">
@@ -28,41 +28,49 @@
             </div> -->
         </header>
 
-        <main class="scrollable">
-           
-            <div class="ud" id="userData">
-              <form class="userDataForm" onsubmit="return Client.handleSubmit(event)">
-                <div id="destination">
-                    <!-- <label for="country">Country:</label>
-                    <input id="country" type="text" name="country" value="" placeholder="Country">
-                     -->
-                    <label for="city">City:</label>
-                    <input id="city" type="text" name="city" value="" placeholder="City">
-                 </div>
-                 <div id="time">
-                    <label for="departure">Departure:</label>
-                    <input id="departure" type="date" name="departure" value="" placeholder="Departure">
+        <!-- <main class="scrollable"> -->
+        <main>
+           <div id="row1">
+                <div class="ud" id="userData">
+                <form id="form1" class="userDataForm" onsubmit="return Client.handleSubmit(event)">
+                    <div id="destination">
+                        <!-- <label for="country">Country:</label>
+                        <input id="country" type="text" name="country" value="" placeholder="Country">
+                        -->
+                        <label for="city">City:</label>
+                        <input id="city" type="text" name="city" value="" placeholder="City">
+                    </div>
+                    <div id="time">
+                        <label for="departure">Departure:</label>
+                        <input id="departure" type="date" name="departure" value="" placeholder="Departure">
+                        
+                        <label for="arrival">Return:</label>
+                        <input id="arrival" type="date" name="arrival" value="" placeholder="Arrival">
+                    </div>
+                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
+                    <button id="clearBtn" >Clear</button>
+                    <div class="timer j-first-timer" id="countDown"></div>
+                </form>
+                </div>
+
+                <div class="pi" id="pixabay">
+                <!-- <div id="pixabay" class="px" style="background-image: url('../images/socrates.jpg');"> -->
+                   <div id="images">
+                    <img class="im" id="pixabayImg" >
+                    <img class="fl" id="pixabayImg2" >
+                   </div>
+                   <div id="info">
+                    <div class="ge" id="geonames">
+                        <label id="lon"> </label>
+                        <label id="lat"> </label>
+                        <label id="cit"> </label>
+                        <label id="cou"> </label>
+                    </div>
+                    <div class="re" id="results" ></div>
+                    </div>
                     
-                    <label for="arrival">Return:</label>
-                    <input id="arrival" type="date" name="arrival" value="" placeholder="Arrival">
                 </div>
-                <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
-              </form>
-            </div>
-
-            <div class="pi" id="pixabay">
-              <!-- <div id="pixabay" class="px" style="background-image: url('../images/socrates.jpg');"> -->
-                <img class="im" id="pixabayImg" >
-                <img class="fl" id="pixabayImg2" >
-                <div class="ge" id="geonames">
-                    <label id="lon"> </label>
-                    <label id="lat"> </label>
-                    <label id="cit"> </label>
-                    <label id="cou"> </label>
-                </div>
-                <div class="re" id="results" ></div>
-            </div>
-
+           </div>
             <div class="we" id="weatherbit">
                 <!-- start weathergrid -->
                 <div class="grid-container" class="scrollable" id="gridContainer">
@@ -131,15 +139,29 @@
                 <!-- ends weathergrid -->
              </div>
 
-
-
-
-
         </main>
 
         <footer>
             <p>Copyright 2020 Nikos</p>
         </footer>
-
+        <script>
+            //   document.getElementById('clear').addEventListener('click', () => Client.clearUi());
+            //   document.getElementById("clearBtn").addEventListener("click", clearUi); 
+         
+            //   function clearUi() {
+            //         document.getElementById("city").innerHTML="";
+            //         document.getElementById("departure").innerHTML="";
+            //         document.getElementById("arrival").innerHTML="";
+            //     }
+            window.addEventListener('load', () => {
+          document.getElementById('clearBtn').addEventListener('click', () => Client.clearUi());
+        });
+        if('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js');
+          });
+        }
+        
+         </script>
     </body>
 </html>
