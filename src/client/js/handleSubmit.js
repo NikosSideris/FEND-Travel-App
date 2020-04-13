@@ -8,27 +8,9 @@ async function handleSubmit(event) {
 
     // let check=isValidUserInput(userData);
   if(!isValidUserInput(userData)){
+    alert("City, Departure date, Return date are required fields. Either a field is missing or is wrong! ");
     return;
   }
-  //   if(checkCookie("city")){
-  //     repaint(userData);
-  //     }else{
-  //       return;
-  //     }
-  // }else{
-  //   if(checkCookie("city")){
-  //     deleteCookie("city");
-  //     deleteCookie("departure");
-  //     deleteCookie("arrival");
-  //   }else{
-  //     setCookie("city",userData.city,1);
-  //     setCookie("departure",userData.departure,1);
-  //     setCookie("arrival",userData.arrival,1);
-  //     location.reload(true);
-  //     handleSubmit();
-  //   }
-  // }
-
 
 
     let impDays = importantDays(userData.departure, userData.arrival);
@@ -179,7 +161,6 @@ async function handleSubmit(event) {
       console.log(error);
     }
   }
-
 function outputWeather(weatherData,impDays) {
   let d=new Date();
   let mon=d.getMonth();
@@ -188,10 +169,6 @@ function outputWeather(weatherData,impDays) {
   let element;
   let col;
   let title;
-  var style = getComputedStyle(document.body);
-  var colore=style.getPropertyValue('--main-color');
-  var bgcolore=style.getPropertyValue('--main-bg-color');
-// console.log(style.getPropertyValue('--color-font-general'));
 for (let i = 1; i < 16; i++) {
   element = weatherData[i];
   // date titles
@@ -202,51 +179,51 @@ for (let i = 1; i < 16; i++) {
   da=dd.getDate();
   title=da+"-"+mon;
   document.getElementById(col).innerHTML=title;
-  if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
-    document.getElementById(col).style.color=colore;
-    document.getElementById(col).style.backgroundColor=bgcolore;
-  }else{
-    document.getElementById(col).style.color="#000";
-    document.getElementById(col).style.backgroundColor="#fff";
-  }
-  // console.log(col, title);
-  // temp
+  paintWeather(impDays,col,i);
+  
+  // temperature
   title=element.temp+" C";
   col="b"+i;
   document.getElementById(col).innerHTML=title;
-  if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
-    document.getElementById(col).style.color=colore;
-    document.getElementById(col).style.backgroundColor=bgcolore;
-  }else{
-    document.getElementById(col).style.color="#000";
-    document.getElementById(col).style.backgroundColor="#fff";
-  }
+
+  paintWeather(impDays,col,i);
+
   //icons
   let sr="/src/client/images/"+element.weather.icon+".png";
   document.getElementById("c"+i+"img").src=sr;
-  if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
-    document.getElementById("c"+i).style.color=colore;
-    document.getElementById("c"+i).style.backgroundColor=bgcolore;
-  }else{
-    document.getElementById("c"+i).style.color="#000";
-    document.getElementById("c"+i).style.backgroundColor="#fff";
-  }
+  paintWeather(impDays,"c"+i,i);
+
   //description
   document.getElementById("d"+i).innerHTML=element.weather.description;
-  if ((i>=impDays.start && i<=impDays.end)||(i>=impDays.start && impDays.duration<0)) {
-    document.getElementById("d"+i).style.color=colore;
-    document.getElementById("d"+i).style.backgroundColor=bgcolore;
-  }else{
-    document.getElementById("d"+i).style.color="#000";
-    document.getElementById("d"+i).style.backgroundColor="#fff";
-  }
-
+  paintWeather(impDays,"d"+i,i);
 }
 
   document.getElementById("gridContainer").style.borderWidth="1px";
   document.getElementById("gridContainer").style.borderRadius="4px";
   document.getElementById("gridContainer").style.borderStyle="Solid";
   // document.getElementById("gridContainer").classList.add("active");
+}
+function paintWeather(impDays,col,i) {
+  // const cond1=(i>=impDays.start && i<=impDays.end);
+  // const cond2=(i>=impDays.start && impDays.duration<0 && impDays.start>=1);
+  // const cond3=(i==impDays.start && impDays.isRetInvalid);
+  const cond1=(i>=impDays.start && i<=impDays.end);
+  const cond2=(i==impDays.start && impDays.end<impDays.start);
+  // const cond2=(i>=impDays.start && impDays.duration<0 && impDays.start>=1);
+  // const cond3=(i==impDays.start && impDays.isRetInvalid);
+  if (cond1 ||cond2) {
+    const style = getComputedStyle(document.body);
+    const colore=style.getPropertyValue('--main-color');
+    const bgcolore=style.getPropertyValue('--main-bg-color');
+    document.getElementById(col).style.color=colore;
+    document.getElementById(col).style.backgroundColor=bgcolore;
+    if (col.search("d")>=0) {
+      document.getElementById(col).style.minHeight="14px";
+    }
+  }else{
+    document.getElementById(col).style.color="#000";
+    document.getElementById(col).style.backgroundColor="#fff";
+  }
 }
 
 function outputPixabay(userData) {
@@ -285,8 +262,8 @@ if (impDays.isPartial) {
 }
 
 output=durationStr+"\n\n"+outOfRange+"\n\n"+partial;
-if (impDays.start<0){
-  output="Departure date cannot be earlier than current date. Just diplaying the next 15 days forecast..."
+if (impDays.start<=0){
+  output="Departure date cannot be earlier than tomorrow. Just diplaying the next 15 days forecast..."
 }
 document.getElementById("results").innerHTML=output;
 
@@ -302,7 +279,7 @@ document.getElementById("results").style.color="#f00";
 
 
 function isValidUserInput(data){
-    const res=(data.city!=null && data.city!="" && data.departure!=null && data.departure!="" );
+    const res=(data.city!=null && data.city!="" && data.departure!=null && data.departure!=""  && data.arrival!=null && data.arrival!="");
     return res;
 }
 
@@ -347,69 +324,6 @@ const postData = async ( url , data)=>{
     return userInput;
 }
 
-function startTimer0(duration, display,interval) {
-  duration=duration*60*60*24;
-  /* From https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer*/
-  var timer = duration, days, hours, minutes, seconds;
-  setInterval(function () {
-      let d=timer/86400; let dt=truncate(d);
-      let h=(d-dt)*24; let ht=truncate(h);
-      let m=(h-ht)*60; let mt=truncate(m);
-      days=parseInt(dt, 10);
-      hours =parseInt(ht, 10);
-      minutes = parseInt(mt, 10);
-      seconds = parseInt(timer % 60, 10);
-
-      days = days < 10 ? "0" + days : days;
-      hours = hours < 10 ? "0" + hours : hours;
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      display.textContent = days + ":" + hours + ":" + minutes + ":" + seconds;
-
-      if (--timer < 0) {
-          timer = duration;
-      }
-  }, 1000);
-}
-
-function startTimer(duration, display,interval) {
-  duration=duration*60*60*24;
-  /* From https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer*/
-
-  let timer = duration, days;
-  clearInterval(interval)
-  interval=setInterval(function () {
-      // let d=timer/86400; let dt=truncate(d);
-      // let h=(d-dt)*24; let ht=truncate(h);
-      // let m=(h-ht)*60; let mt=truncate(m);
-      days=parseInt(truncate(timer/86400+1), 10);
-      // hours =parseInt(ht, 10);
-      // minutes = parseInt(mt, 10);
-      // seconds = parseInt(timer % 60, 10);
-
-      days = days < 10 ? "0" + days : days;
-      // hours = hours < 10 ? "0" + hours : hours;
-      // minutes = minutes < 10 ? "0" + minutes : minutes;
-      // seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      if(days>0){
-      display.textContent = "Departure in "+days + " days";
-      }else{
-        display.textContent = "";
-      }
-
-      if (--timer < 0) {
-          timer = duration;
-      }
-  }, 1000);
-  return timer;
-}
-// window.onload = function () {
-//   var fiveMinutes = 60 * 5,
-//       display = document.querySelector('#countDown');
-//   startTimer(fiveMinutes, display);
-// };
 
 function importantDays(departStr,returnStr){
   const dayms=1000 * 60 * 60 * 24;
@@ -435,10 +349,10 @@ function importantDays(departStr,returnStr){
   current=truncate(current/dayms);
   let limit=current+15;
   idays.limit=limit;
-  idays.duration=ret-dep;
-  idays.start=dep-current;
-  idays.end=ret-current;
-  idays.isOutOfRange=limit<dep;
+  idays.duration=Math.ceil(ret-dep);
+  idays.start=Math.ceil(dep-current);
+  idays.end=Math.ceil(ret-current);
+  idays.isOutOfRange=(limit<dep) || (idays.start<1);
   idays.isRetInvalid=ret<dep;
   idays.isPartial=ret>limit && dep<=limit;
 
