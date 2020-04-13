@@ -8,15 +8,30 @@ async function handleSubmit(event) {
 
     // let check=isValidUserInput(userData);
   if(!isValidUserInput(userData)){
-    // console.log(check);
-    
     return;
   }
+  //   if(checkCookie("city")){
+  //     repaint(userData);
+  //     }else{
+  //       return;
+  //     }
+  // }else{
+  //   if(checkCookie("city")){
+  //     deleteCookie("city");
+  //     deleteCookie("departure");
+  //     deleteCookie("arrival");
+  //   }else{
+  //     setCookie("city",userData.city,1);
+  //     setCookie("departure",userData.departure,1);
+  //     setCookie("arrival",userData.arrival,1);
+  //     location.reload(true);
+  //     handleSubmit();
+  //   }
+  // }
+
+
 
     let impDays = importantDays(userData.departure, userData.arrival);
-    // userData.city = getCity();
-    // userData.start = getTripStart();
-    // userData.end = getTripEnd();
   
     const geoLocation = await getGeoLocation(userData.city);
   
@@ -48,25 +63,32 @@ async function handleSubmit(event) {
     // startTimer(impDays.start, display,interval);
 
     console.log(impDays);
-    
-    const timer = new TimezZ(".j-first-timer", {
+
+    if(typeof window.timer !== 'undefined'){
+      // window.timer.isStopped=true;
+      // window.timer=null;
+      window.timer.destroy();
+      display.innerHTML="";
+    };
+
+     window.timer =new  TimezZ(".j-first-timer", {
       date: impDays.timer, //"Dec 02, 2023 00:00:00",
       text: {
-        days: " days",
-        hours: " hours",
-        minutes: " minutes",
-        seconds: " seconds"
+        days: "d ",
+        hours: "h ",
+        minutes: "m"
+        // seconds: ":"
       },
       isStopped: false,
-      canContinue: true,
-      template: "<span>NUMBER</span><i>LETTER</i> ",
+      canContinue: false,
+      template: "<span>NUMBER</span><b>LETTER</b> ",
       beforeCreate() {console.log("timer starting");
       },
     });
 
     setTimeout(() => {
-      timer.destroy();
-    }, 100000);
+      // timer.destroy();
+    }, 1000);
   }
 
 
@@ -433,4 +455,47 @@ function truncate(value)
 
     return Math.floor(value);
 }
+
+
+function repaint(userData) {
+  document.getElementById("city").innerHTML=getCookie("city");
+  document.getElementById("departure").innerHTML=getCookie("departure");
+  document.getElementById("arrival").innerHTML=getCookie("arrival");
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+
+function deleteCookie(name) { setCookie(name, '', -1); }
+
+function checkCookie(name) {
+  var cookieVale = getCookie(name);
+  if (cookieVale != "") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 export { handleSubmit }
