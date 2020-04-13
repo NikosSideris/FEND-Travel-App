@@ -69,3 +69,5 @@ app.post("/article", (req, res) => {
     }
   });
 })
+
+module.exports = app;
