@@ -6,7 +6,7 @@ The project is the Capstone of the FEND nanodegree of Udacity
 ## Instructions
 
 1. Download or clone the project:
-   git clone https://github.com/saltamay/travel-app.git [folder_name]
+   git clone https://github.com/NikosSideris/FEND-Travel-App/tree/Submit [folder_name]
 
 2. Install dependencies:  npm install
 
