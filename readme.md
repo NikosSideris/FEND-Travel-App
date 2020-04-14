@@ -34,5 +34,5 @@ The project is the Capstone of the FEND nanodegree of Udacity
 
 ## Notes on UI
 
-Displaying concurrently 15-day forecasts is not that easy, taking into account the different browsers, devices, screens, etc. The solution of horizontal scrolling was selected as a quick and firty approach to save time. Of course, many other approaches could be selected.
+Displaying concurrently 15-day forecasts is not that easy, taking into account the different browsers, devices, screens, etc. The solution of horizontal scrolling was selected as a quick and dirty approach to save time. Of course, many other approaches could be selected.
 

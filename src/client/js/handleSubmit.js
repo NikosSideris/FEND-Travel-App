@@ -1,5 +1,5 @@
-
-import TimezZ from "Client.timezz";
+import {importantDays,truncate } from "./helpers";
+import TimezZ from "timezz";
 
 async function handleSubmit(event) {
 
@@ -192,6 +192,7 @@ function outputWeather(weatherData, impDays) {
 
 		//icons
 		let sr = "/src/client/images/" + element.weather.icon + ".png";
+		// let sr = "Client." + element.weather.icon + ".png";
 		document.getElementById("c" + i + "img").src = sr;
 		paintWeather(impDays, "c" + i, i);
 
@@ -331,7 +332,7 @@ async function readInput() {
 }
 
 
-function importantDays(departStr, returnStr) {
+function importantDays0(departStr, returnStr) {
 	const dayms = 1000 * 60 * 60 * 24;
 
 	let idays = {}
@@ -367,13 +368,7 @@ function importantDays(departStr, returnStr) {
 	return idays;
 }
 
-function truncate(value) {
-	if (value < 0) {
-		return Math.ceil(value);
-	}
 
-	return Math.floor(value);
-}
 
 
 function repaint(userData) {

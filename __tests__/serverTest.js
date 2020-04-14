@@ -1,6 +1,6 @@
 const request = require('supertest');
-import { app }from '../src/server/server'
-
+// import { app }from '../src/server/server'
+const app=require('../src/server/server');
 
 describe('Server is running', () => {
   it('should return 200', async () => {
