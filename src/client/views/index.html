@@ -1,167 +1,145 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Travel App</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-        <meta name="author" content="Nikos">
 
-        <!-- <link rel="stylesheet" href="../styles/resets.scss?v=1.0">
-        <link rel="stylesheet" href="../styles/base.scss?v=1.0">
-        <link rel="stylesheet" href="../styles/header.scss?v=1.0">
-        <link rel="stylesheet" href="../styles/form.scss?v=1.0">
-        <link rel="stylesheet" href="../styles/footer.scss?v=1.0">
-        <link rel="stylesheet" href="../styles/main.scss?v=1.0"> -->
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>Travel App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="author" content="Nikos">
 
-    <body>
+</head>
 
-        <header>
-            <div class="logo">
-                Travel App
-            </div>
-            <!-- <div class="navMenu">
-                <a class="active" href="#home">Home</a>
-                <a href="#news">News</a>
-                <a href="#contact">Contact</a>
-                <a href="#about">About</a>
-            </div> -->
-        </header>
+<body>
 
-        <!-- <main class="scrollable"> -->
-        <main>
-           <div id="row1">
-                <div class="ud" id="userData">
+    <header>
+        <div class="logo">
+            Travel App
+        </div>
+    </header>
+
+    <main>
+        <div id="row1">
+            <div class="ud" id="userData">
                 <form id="form1" class="userDataForm" onsubmit="return Client.handleSubmit(event)">
                     <div id="destination">
-                        <!-- <label for="country">Country:</label>
-                        <input id="country" type="text" name="country" value="" placeholder="Country">
-                        -->
+
                         <label for="city">City:</label>
                         <input id="city" type="text" name="city" value="" placeholder="City">
                     </div>
                     <div id="time">
                         <label for="departure">Departure:</label>
                         <input id="departure" type="date" name="departure" value="" placeholder="Departure">
-                        
+
                         <label for="arrival">Return:</label>
                         <input id="arrival" type="date" name="arrival" value="" placeholder="Arrival">
                     </div>
                     <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
-                    <button id="clearBtn" >Clear</button>
+                    <button id="clearBtn">Clear</button>
                     <div class="timer j-first-timer" id="countDown"></div>
                 </form>
-                </div>
+            </div>
 
-                <div class="pi" id="pixabay">
+            <div class="pi" id="pixabay">
                 <!-- <div id="pixabay" class="px" style="background-image: url('../images/socrates.jpg');"> -->
-                   <div id="images">
-                    <img class="im" id="pixabayImg" >
-                    <img class="fl" id="pixabayImg2" >
-                   </div>
-                   <div id="info">
+                <div id="images">
+                    <img class="im" id="pixabayImg">
+                    <img class="fl" id="pixabayImg2">
+                </div>
+                <div id="info">
                     <div class="ge" id="geonames">
                         <label id="lon"> </label>
                         <label id="lat"> </label>
                         <label id="cit"> </label>
                         <label id="cou"> </label>
                     </div>
-                    <div class="re" id="results" ></div>
-                    </div>
-                    
+                    <div class="re" id="results"></div>
                 </div>
-           </div>
-            <div class="we" id="weatherbit">
-                <!-- start weathergrid -->
-                <div class="grid-container" class="scrollable" id="gridContainer">
-                  <div id="a1"></div>
-                  <div id="a2"></div>
-                  <div id="a3"></div>
-                  <div id="a4"></div>
-                  <div id="a5"></div>
-                  <div id="a6"></div>
-                  <div id="a7"></div>
-                  <div id="a8"></div>
-                  <div id="a9"></div>
-                  <div id="a10"></div>
-                  <div id="a11"></div>
-                  <div id="a12"></div>
-                  <div id="a13"></div>
-                  <div id="a14"></div>
-                  <div id="a15"></div>
-                  <div id="b1"></div>
-                  <div id="b2"></div>
-                  <div id="b3"></div>
-                  <div id="b4"></div>
-                  <div id="b5"></div>
-                  <div id="b6"></div>
-                  <div id="b7"></div>
-                  <div id="b8"></div>
-                  <div id="b9"></div>
-                  <div id="b10"></div>
-                  <div id="b11"></div>
-                  <div id="b12"></div>
-                  <div id="b13"></div>
-                  <div id="b14"></div>
-                  <div id="b15"></div>
-                  <div id="c1"> <img id="c1img" > </div>
-                  <div id="c2"><img id="c2img"  ></div>
-                  <div id="c3"><img id="c3img"  ></div>
-                  <div id="c4"><img id="c4img"  ></div>
-                  <div id="c5"><img id="c5img"  ></div>
-                  <div id="c6"><img id="c6img"  ></div>
-                  <div id="c7"><img id="c7img"  ></div>
-                  <div id="c8"><img id="c8img"  ></div>
-                  <div id="c9"><img id="c9img"  ></div>
-                  <div id="c10"><img id="c10img"  ></div>
-                  <div id="c11"><img id="c11img"  ></div>
-                  <div id="c12"><img id="c12img"  ></div>
-                  <div id="c13"><img id="c13img"  ></div>
-                  <div id="c14"><img id="c14img"  ></div>
-                  <div id="c15"><img id="c15img"  ></div>
-                  <div id="d1"></div>
-                  <div id="d2"></div>
-                  <div id="d3"></div>
-                  <div id="d4"></div>
-                  <div id="d5"></div>
-                  <div id="d6"></div>
-                  <div id="d7"></div>
-                  <div id="d8"></div>
-                  <div id="d9"></div>
-                  <div id="d10"></div>
-                  <div id="d11"></div>
-                  <div id="d12"></div>
-                  <div id="d13"></div>
-                  <div id="d14"></div>
-                  <div id="d15"></div>
-                </div>
-                
-                <!-- ends weathergrid -->
-             </div>
 
-        </main>
+            </div>
+        </div>
+        <div class="we" id="weatherbit">
+            <!-- start weathergrid -->
+            <div class="grid-container" class="scrollable" id="gridContainer">
+                <div id="a1"></div>
+                <div id="a2"></div>
+                <div id="a3"></div>
+                <div id="a4"></div>
+                <div id="a5"></div>
+                <div id="a6"></div>
+                <div id="a7"></div>
+                <div id="a8"></div>
+                <div id="a9"></div>
+                <div id="a10"></div>
+                <div id="a11"></div>
+                <div id="a12"></div>
+                <div id="a13"></div>
+                <div id="a14"></div>
+                <div id="a15"></div>
+                <div id="b1"></div>
+                <div id="b2"></div>
+                <div id="b3"></div>
+                <div id="b4"></div>
+                <div id="b5"></div>
+                <div id="b6"></div>
+                <div id="b7"></div>
+                <div id="b8"></div>
+                <div id="b9"></div>
+                <div id="b10"></div>
+                <div id="b11"></div>
+                <div id="b12"></div>
+                <div id="b13"></div>
+                <div id="b14"></div>
+                <div id="b15"></div>
+                <div id="c1"> <img id="c1img"> </div>
+                <div id="c2"><img id="c2img"></div>
+                <div id="c3"><img id="c3img"></div>
+                <div id="c4"><img id="c4img"></div>
+                <div id="c5"><img id="c5img"></div>
+                <div id="c6"><img id="c6img"></div>
+                <div id="c7"><img id="c7img"></div>
+                <div id="c8"><img id="c8img"></div>
+                <div id="c9"><img id="c9img"></div>
+                <div id="c10"><img id="c10img"></div>
+                <div id="c11"><img id="c11img"></div>
+                <div id="c12"><img id="c12img"></div>
+                <div id="c13"><img id="c13img"></div>
+                <div id="c14"><img id="c14img"></div>
+                <div id="c15"><img id="c15img"></div>
+                <div id="d1"></div>
+                <div id="d2"></div>
+                <div id="d3"></div>
+                <div id="d4"></div>
+                <div id="d5"></div>
+                <div id="d6"></div>
+                <div id="d7"></div>
+                <div id="d8"></div>
+                <div id="d9"></div>
+                <div id="d10"></div>
+                <div id="d11"></div>
+                <div id="d12"></div>
+                <div id="d13"></div>
+                <div id="d14"></div>
+                <div id="d15"></div>
+            </div>
 
-        <footer>
-            <p>Copyright 2020 Nikos</p>
-        </footer>
-        <script>
-            //   document.getElementById('clear').addEventListener('click', () => Client.clearUi());
-            //   document.getElementById("clearBtn").addEventListener("click", clearUi); 
-         
-            //   function clearUi() {
-            //         document.getElementById("city").innerHTML="";
-            //         document.getElementById("departure").innerHTML="";
-            //         document.getElementById("arrival").innerHTML="";
-            //     }
-            window.addEventListener('load', () => {
-          document.getElementById('clearBtn').addEventListener('click', () => Client.clearUi());
+            <!-- ends weathergrid -->
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Copyright 2020 Nikos</p>
+    </footer>
+    <script>
+        window.addEventListener('load', () => {
+            document.getElementById('clearBtn').addEventListener('click', () => Client.clearUi());
         });
-        if('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js');
-          });
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
         }
-        
-         </script>
-    </body>
+    </script>
+</body>
+
 </html>

@@ -1,4 +1,9 @@
-import {importantDays,truncate } from "./helpers";
+
+
+import {
+	importantDays,
+	truncate
+} from "./helpers";
 import TimezZ from "timezz";
 
 async function handleSubmit(event) {
@@ -7,13 +12,12 @@ async function handleSubmit(event) {
 	let coordinates;
 	const userData = await readInput();
 
-	// let check=isValidUserInput(userData);
 	if (!isValidUserInput(userData)) {
 		alert("City, Departure date, Return date are required fields. Either a field is missing or is wrong! ");
 		return;
 	}
 
-                                
+
 	let impDays = importantDays(userData.departure, userData.arrival);
 
 	const geoLocation = await getGeoLocation(userData.city);
@@ -43,19 +47,15 @@ async function handleSubmit(event) {
 
 	let interval;
 
-	// startTimer(impDays.start, display,interval);
-
 	console.log(impDays);
 
 	if (typeof window.timer !== 'undefined') {
-		// window.timer.isStopped=true;
-		// window.timer=null;
 		window.timer.destroy();
 		display.innerHTML = "";
 	};
 
 	window.timer = new TimezZ(".j-first-timer", {
-		date: impDays.timer, //"Dec 02, 2023 00:00:00",
+		date: impDays.timer,
 		text: {
 			days: "d ",
 			hours: "h ",
@@ -100,15 +100,12 @@ async function getGeoLocation(location) {
 }
 
 async function getWeatherForecast(latitude, longitude) {
-	const url = 'http://api.weatherbit.io/v2.0/forecast/daily ';
+	const baseUrl = 'http://api.weatherbit.io/v2.0/forecast/daily ';
 	const key = '1f6bca0399b141d4bab99bb6a511d04e';
 	const query = "?lat=" + `${latitude}` + "&lon=" + `${longitude}` + "&key=";
-	//&lat=38.123&lon=-78.543
-	//&key=API_KEY
-	// ie https://api.weatherbit.io/v2.0/forecast/daily?city=Raleigh,NC&key=API_KEY
-	const endpoint = url + query + key;
+	const url = baseUrl + query + key;
 	try {
-		const response = await fetch(endpoint);
+		const response = await fetch(url);
 		if (response.ok) {
 			const weather = [];
 			const jResponse = await response.json();
@@ -133,7 +130,7 @@ async function getImageURL(city, country) {
 		if (response.ok) {
 			let jRes = await response.json();
 			if (jRes.totalHits === 0) {
-				// if no city imgs, then ask country imgs
+				// if no city imgs, then fetch country img
 				response = await fetch(qCountry);
 				if (response.ok) {
 					jRes = await response.json();
@@ -192,7 +189,6 @@ function outputWeather(weatherData, impDays) {
 
 		//icons
 		let sr = "/src/client/images/" + element.weather.icon + ".png";
-		// let sr = "Client." + element.weather.icon + ".png";
 		document.getElementById("c" + i + "img").src = sr;
 		paintWeather(impDays, "c" + i, i);
 
@@ -204,17 +200,14 @@ function outputWeather(weatherData, impDays) {
 	document.getElementById("gridContainer").style.borderWidth = "1px";
 	document.getElementById("gridContainer").style.borderRadius = "4px";
 	document.getElementById("gridContainer").style.borderStyle = "Solid";
-	// document.getElementById("gridContainer").classList.add("active");
+
 }
 
 function paintWeather(impDays, col, i) {
-	// const cond1=(i>=impDays.start && i<=impDays.end);
-	// const cond2=(i>=impDays.start && impDays.duration<0 && impDays.start>=1);
-	// const cond3=(i==impDays.start && impDays.isRetInvalid);
+
 	const cond1 = (i >= impDays.start && i <= impDays.end);
 	const cond2 = (i == impDays.start && impDays.end < impDays.start);
-	// const cond2=(i>=impDays.start && impDays.duration<0 && impDays.start>=1);
-	// const cond3=(i==impDays.start && impDays.isRetInvalid);
+
 	if (cond1 || cond2) {
 		const style = getComputedStyle(document.body);
 		const colore = style.getPropertyValue('--main-color');
@@ -241,16 +234,11 @@ function outputCoordinates(userData) {
 	document.getElementById("cit").innerHTML = "City: " + userData.city;
 	document.getElementById("cou").innerHTML = "Country: " + userData.countryCode;
 
-	// document.getElementById("geonames").style.borderWidth="1px";
-	// document.getElementById("geonames").style.borderRadius="4px";
-	// document.getElementById("geonames").style.borderStyle="Solid";
-
 }
 
 function outputResults(userData, impDays) {
 	let output, durationStr, outOfRange, partial;
 	if (!impDays.isRetInvalid) {
-		// let duration=impDays.end-impDays.start;
 		durationStr = "Trip duration: " + impDays.duration + " day(s)";
 	} else {
 		durationStr = "Return date earlier than Departure date. Taking into account only the Departure date...";
@@ -275,12 +263,7 @@ function outputResults(userData, impDays) {
 
 	document.getElementById("results").style.color = "#f00";
 
-	// document.getElementById("results").style.borderWidth="1px";
-	// document.getElementById("results").style.borderRadius="4px";
-	// document.getElementById("results").style.borderStyle="Solid";
-
 }
-//*******************************************my */
 
 
 function isValidUserInput(data) {
@@ -288,41 +271,14 @@ function isValidUserInput(data) {
 	return res;
 }
 
-/* Function to POST data */
-const postData = async(url, data) => {
-	console.log("postData data: ", data);
-	const response = await fetch(url, {
-		method: 'POST',
-		credentials: 'include', //same-origin
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		// body: JSON.stringify(data),
-		body: {
-			"city": data
-		},
-	});
-
-	try {
-		console.log("rrresponse: ", response);
-		const newData = await response.json();
-		console.log("postData return: ");
-		console.log(newData);
-		appData = newData;
-		return newData;
-	} catch (error) {
-		console.log("postData error", error);
-	}
-}
 
 async function readInput() {
-	// let country = document.getElementById("country").value;
+
 	let city = document.getElementById("city").value;
 	let departure = document.getElementById("departure").value;
 	let arrival = document.getElementById("arrival").value;
 
 	let userInput = {
-		// "country": country,
 		"city": city,
 		"departure": departure,
 		"arrival": arrival
@@ -369,8 +325,6 @@ function importantDays0(departStr, returnStr) {
 }
 
 
-
-
 function repaint(userData) {
 	document.getElementById("city").innerHTML = getCookie("city");
 	document.getElementById("departure").innerHTML = getCookie("departure");
@@ -383,7 +337,8 @@ function setCookie(cname, cvalue, exdays) {
 	var expires = "expires=" + d.toUTCString();
 	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
-
+/*Cookie functions included just for future functionality,
+currently not used*/
 function getCookie(cname) {
 	var name = cname + "=";
 	var decodedCookie = decodeURIComponent(document.cookie);
@@ -399,7 +354,6 @@ function getCookie(cname) {
 	}
 	return "";
 }
-
 
 function deleteCookie(name) {
 	setCookie(name, '', -1);
